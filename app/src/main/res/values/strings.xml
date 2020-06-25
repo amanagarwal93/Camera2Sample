@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">CameraApi2Sample</string>
+    <string name="intro_message">
+        <![CDATA[
+
+
+            This sample demonstrates how to record video using Camera2 API.
+
+
+        ]]>
+    </string>
+    <string name="record">Record</string>
+    <string name="stop">Stop</string>
+    <string name="description_info">Info</string>
+</resources>
