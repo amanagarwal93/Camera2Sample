@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <com.example.cameraapi2sample.AutoFitTextureView
         android:id="@+id/texture"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/frameaLayout"/>
+        android:layout_height="match_parent"/>
 
     <FrameLayout
         android:id="@+id/frameaLayout"
@@ -30,4 +30,14 @@
             android:padding="20dp"
             android:src="@drawable/ic_baseline_autorenew_24" />
     </FrameLayout>
+
+    <TextView
+        android:id="@+id/textCountDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        android:layout_centerInParent="true"
+        android:textColor="@android:color/white"
+        android:textSize="72sp"
+        tools:text="0" />
 </RelativeLayout>

@@ -32,6 +32,7 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
@@ -52,6 +53,10 @@ public class Camera2VideoFragment extends Fragment implements View.OnClickListen
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
 
     private static final String TAG = "Camera2VideoFragment";
+
+    private int count = 3;
+    private Thread thread;
+    private TextView timer;
 
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 90);
@@ -248,6 +253,7 @@ public class Camera2VideoFragment extends Fragment implements View.OnClickListen
         mTextureView = (AutoFitTextureView) view.findViewById(R.id.texture);
         mButtonVideo = (Button) view.findViewById(R.id.video);
         mButtonVideo.setOnClickListener(this);
+        timer = view.findViewById(R.id.textCountDown);
         view.findViewById(R.id.info).setOnClickListener(this);
     }
 
@@ -279,7 +285,34 @@ public class Camera2VideoFragment extends Fragment implements View.OnClickListen
             case R.id.video: {
                 if (mIsRecordingVideo) {
                     stopRecordingVideo();
+//                    thread.interrupt();
                 } else {
+                    /*thread = new Thread() {
+                        @Override
+                        public void run() {
+                            while (!thread.isInterrupted()) {
+                                try {
+                                    Thread.sleep(1000);
+
+                                    getActivity().runOnUiThread(() -> {
+                                        // If there are stories, add them to the table
+                                        if (count > 0) {
+                                            timer.setText(String.valueOf(count));
+                                            count--;
+                                        } else {
+                                            timer.setText("");
+                                            count = 0;
+                                            startRecordingVideo();
+                                        }
+                                    });
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    };
+                    thread.start();*/
+
                     startRecordingVideo();
                 }
                 break;
@@ -499,7 +532,7 @@ public class Camera2VideoFragment extends Fragment implements View.OnClickListen
         mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.SURFACE);
         mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-        mMediaRecorder.setOutputFile("/sdcard/ " + System.currentTimeMillis() + "camerApi2.mp4");
+        mMediaRecorder.setOutputFile("/sdcard/ " + "video_"+System.currentTimeMillis() + "_camerApi2.mp4");
         mMediaRecorder.setVideoEncodingBitRate(10000000);
         mMediaRecorder.setVideoFrameRate(30);
         mMediaRecorder.setVideoSize(mVideoSize.getWidth(), mVideoSize.getHeight());
@@ -536,7 +569,7 @@ public class Camera2VideoFragment extends Fragment implements View.OnClickListen
         mMediaRecorder.reset();
         Activity activity = getActivity();
         if (null != activity) {
-            Toast.makeText(activity, "Video saved: " + getVideoFile(activity),
+            Toast.makeText(activity, "Video saved: " ,
                     Toast.LENGTH_SHORT).show();
         }
         startPreview();
