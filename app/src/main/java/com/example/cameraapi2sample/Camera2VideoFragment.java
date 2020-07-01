@@ -412,7 +412,7 @@ public class Camera2VideoFragment extends Fragment implements View.OnClickListen
             reader.setOnImageAvailableListener(readerListener, mBackgroundHandler);
             final CameraCaptureSession.CaptureCallback captureListener = new CameraCaptureSession.CaptureCallback() {
                 @Override
-                public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
+                public void onCaptureCompleted(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, TotalCaptureResult result) {
                     super.onCaptureCompleted(session, request, result);
                     Log.d(TAG, "onCaptureCompleted: " + file);
                     Toast.makeText(getActivity(), "Saved:" + file, Toast.LENGTH_SHORT).show();
@@ -556,6 +556,10 @@ public class Camera2VideoFragment extends Fragment implements View.OnClickListen
             if (null != mMediaRecorder) {
                 mMediaRecorder.release();
                 mMediaRecorder = null;
+            }
+            if(mPreviewSession != null){
+                mPreviewSession.close();
+                mPreviewSession = null;
             }
         } catch (InterruptedException e) {
             throw new RuntimeException("Interrupted while trying to lock camera closing.");
