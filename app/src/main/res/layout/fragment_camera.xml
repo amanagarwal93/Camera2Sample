@@ -16,6 +16,18 @@
         android:layout_alignParentBottom="true">
 
         <ImageButton
+            android:id="@+id/photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/transparent"
+            android:padding="15dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/camera_btn"
+            tools:ignore="ContentDescription" />
+
+
+        <ImageButton
             android:id="@+id/video"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
